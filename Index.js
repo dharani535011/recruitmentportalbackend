@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // implementing the cors
 app.use(cors({
-    origin:["http://localhost:5174/","https://recruitment-portal-task.netlify.app/"],
+    origin:true,
     credentials:true
 }))
 // implementing the body parser
