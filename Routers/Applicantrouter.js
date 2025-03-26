@@ -5,4 +5,5 @@ ApplicantRouter.post("/store-detials",upload.single("resume"),Applicant.detialst
 ApplicantRouter.post("/asign-interviewer",Applicant.asigninterviewer)
 ApplicantRouter.post("/review",Applicant.givereview)
 ApplicantRouter.post("/changestatus",Applicant.changestatus)
+ApplicantRouter.get("/allapplicants",Applicant.allaplicants)
 module.exports=ApplicantRouter

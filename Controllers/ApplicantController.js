@@ -42,7 +42,7 @@ const upload=multer({storage:storage,fileFilter:filefilter})
 const Applicant={
     detialstore:async(req,res)=>{
         const {name,mail,phone,education,experience,skills}=req.body
-               
+        // console.log("Received file:", req.file)
         try {
              if(!name||!mail||!phone||!education||!experience||!skills||!req.file.path){
                  return res.send({message:"value is missing, including resume PDF! also needed"})
@@ -51,7 +51,7 @@ const Applicant={
              if(isUser){
                 return res.send({message:"User already registered"})
              }
-             const saveUser=new Applicants({name,mail,phone,education,experience,skills:skills.split(","),resume:req.file.path})
+             const saveUser=new Applicants({name,mail,phone,education,experience,skills,resume:req.file.path})
              await saveUser.save()
             res.send({message:"Applicant Registered"})
         } catch (error) {
@@ -75,6 +75,7 @@ const Applicant={
     
             // Save interviewers in the database
             isUser.interviewers = interviewers
+            isUser.status="scheduled"
             await isUser.save()
     
             // Send emails to interviewers
@@ -127,6 +128,7 @@ const Applicant={
                         isUser.hr.overall=overall
                         isUser.hr.rating=rating
                         isUser.hr.saw=saw
+                        isUser.count+=1
                     }else{
                         return res.send({message:"already review given"})
                     }
@@ -138,6 +140,7 @@ const Applicant={
                         isUser.tech.overall=overall
                         isUser.tech.rating=rating
                         isUser.tech.saw=saw
+                        isUser.count+=1
                     }else{
                         return res.send({message:"already review given"})
                     }
@@ -149,6 +152,7 @@ const Applicant={
                         isUser.task.overall=overall
                         isUser.task.rating=rating
                         isUser.task.saw=saw
+                        isUser.count+=1
                     }else{
                         return res.send({message:"already review given"})
                     }
@@ -172,6 +176,14 @@ const Applicant={
             isUser.status=status
             await isUser.save()
             res.send({message:"applicant status is updated"})
+        } catch (error) {
+            res.send({message:error.message})
+        }
+    },
+    allaplicants:async(req,res)=>{
+        try {
+            const applicants=await Applicants.find()
+            res.send({message:applicants})
         } catch (error) {
             res.send({message:error.message})
         }

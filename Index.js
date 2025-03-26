@@ -28,11 +28,11 @@ app.use("/applicant",ApplicantRouter)
 
 
 // CONNECTING DATABASE AND SERVER
-
+const port=3000 
 mongoose.connect(MONGODB)
 .then(()=>{
     console.log("DATABASE CONNECTED")
-    app.listen(3000,()=>{
+    app.listen(port,()=>{
         console.log("SERVER CONNECTED")
     })
 })

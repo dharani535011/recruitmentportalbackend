@@ -8,27 +8,28 @@ const userSchema=new mongoose.Schema({
     education:{type:String,required:true},
     resume:{type:String,required:true},
     interviewers:[{type:String}],
-    status:{type:String,defalut:"pending"},
+    status:{type:String,default:"pending"},
+    count:{type:Number,default:0},
     tech:{
-        person:String,
-        saw:String,
-        rating:String,
-        overall:String,
-        feedback:String
+        person:{type:String,default:""},
+        saw:{type:String,default:""},
+        rating:{type:String,default:""},
+        overall:{type:String,default:""},
+        feedback:{type:String,default:""}
     },
     hr:{
-        person:String,
-        saw:String,
-        rating:String,
-        overall:String,
-        feedback:String
+        person:{type:String,default:""},
+        saw:{type:String,default:""},
+        rating:{type:String,default:""},
+        overall:{type:String,default:""},
+        feedback:{type:String,default:""}
     },
     task:{
-        person:String,
-        saw:String,
-        rating:String,
-        overall:String,
-        feedback:String
+        person:{type:String,default:""},
+        saw:{type:String,default:""},
+        rating:{type:String,default:""},
+        overall:{type:String,default:""},
+        feedback:{type:String,default:""}
     }
 })
 const Applicants=mongoose.model("Applicants",userSchema,"Applicants")
